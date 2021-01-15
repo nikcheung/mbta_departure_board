@@ -28,7 +28,7 @@ const DepartureBoard: React.FC<DepartureBoardProps> = ({stop, backToList}) => {
   return (
     <div>
       <h1>Departures from {stop.attributes.name}</h1>
-      <p>Current Time: {new Date().toLocaleTimeString("en-US")}</p>
+      <p>Current Time: {new Date().toLocaleTimeString(`en-US`)}</p>
       <div>
         <table className="table">
           <tbody>

@@ -9,8 +9,8 @@ interface ScheduleProps {
 }
 
 function getStatus(prediction: Prediction, scheduledDepartureTime: Date): string {
-  if (!prediction) return "UNKNOWN";
-  return new Date(prediction.attributes.departure_time) <= scheduledDepartureTime ? "ON TIME" : "DELAYED";
+  if (!prediction) return `UNKNOWN`;
+  return new Date(prediction.attributes.departure_time) <= scheduledDepartureTime ? `ON TIME` : `DELAYED`;
 }
 
 // would like to have redux instead of passing these lists
@@ -28,7 +28,7 @@ const ScheduleComponent: React.FC<ScheduleProps> = ({ schedule, routes, vehicles
   return (
     <tr>
       <td>{schedule.attributes.departure_time.toDateString()}</td>
-      <td>{schedule.attributes.departure_time.toLocaleTimeString("en-US")}</td>
+      <td>{schedule.attributes.departure_time.toLocaleTimeString(`en-US`)}</td>
       <td>{direction}</td>
       <td>{destination}</td>
       <td>{vehicle?.attributes.label}</td>

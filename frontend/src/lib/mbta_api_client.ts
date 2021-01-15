@@ -1,4 +1,4 @@
-import { Schedule } from "../types";
+import { Schedule } from '../types';
 
 export class MbtaApiClient {
   static BASE_URL = `https://api-v3.mbta.com`;
@@ -31,7 +31,7 @@ export class MbtaApiClient {
   }
 
   static fetchVehicles(routeIds: number[], callback: (value: any) => any) {
-    this.fetchEndpoint(`${this.BASE_URL}/vehicles?filter[route]=${routeIds.join(",")}`, callback);
+    this.fetchEndpoint(`${this.BASE_URL}/vehicles?filter[route]=${routeIds.join(`,`)}`, callback);
   }
 
   static fetchPredictions(stopId: number, callback: (value: any) => any) {
