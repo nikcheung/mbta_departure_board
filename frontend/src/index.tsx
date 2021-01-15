@@ -10,7 +10,7 @@ const App = () => {
   const chooseStop = (stop: Stop) => setStop(stop)
   const clearStop = () => setStop(null)
   return (
-    <div>
+    <div className="container mt-4">
       { stop ? (
         <DepartureBoard stop={stop} backToList={clearStop}/>
        ) : (

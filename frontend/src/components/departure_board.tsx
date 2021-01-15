@@ -29,7 +29,7 @@ const DepartureBoard: React.FC<DepartureBoardProps> = ({stop, backToList}) => {
     <div>
       <h1>Departures from {stop.attributes.name}</h1>
       <div>
-        <table>
+        <table className="table">
           <tbody>
             <tr>
               <th>Date:</th>
@@ -53,7 +53,7 @@ const DepartureBoard: React.FC<DepartureBoardProps> = ({stop, backToList}) => {
             }
           </tbody>
         </table>
-        <button className="btn-secondary" onClick={backToList}>Back to list</button>
+        <button className="btn btn-secondary" onClick={backToList}>Back to list</button>
       </div>
     </div>
   )

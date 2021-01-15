@@ -22,8 +22,8 @@ const StopList: React.FC<StopListProps> = ({ chooseStop }) => {
           <StopComponent stop={stop} key={stop.id} chooseStop={chooseStop}></StopComponent>
       ))}
       {offset > 0 &&
-        <button onClick={() => setOffset(offset - limit)}>Previous</button>}
-      <button onClick={() => setOffset(offset + limit)}>Next</button>
+        <button className="btn btn-secondary" onClick={() => setOffset(offset - limit)}>Previous</button>}
+      <button className="btn btn-secondary" onClick={() => setOffset(offset + limit)}>Next</button>
     </div>
   )
 }
