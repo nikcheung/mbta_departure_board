@@ -1,15 +1,37 @@
+import { Schedule } from "../types";
+
 export class MbtaApiClient {
   static BASE_URL = `https://api-v3.mbta.com`;
 
-  static fetchSchedules(stopId: number, callback: (value: any) => any) {
-    this.fetchEndpoint(`${this.BASE_URL}/schedules?filter[stop]=${stopId}`, callback);
-  }
-
   static fetchStops(limit: number, offset: number, callback: (value: any) => any) {
     this.fetchEndpoint(
-      `${this.BASE_URL}/stops?page[${limit}]=10&page[offset]=${offset}`,
+      `${this.BASE_URL}/stops?page[limit]=${limit}&page[offset]=${offset}`,
       callback
     );
+  }
+
+  static fetchSchedules(stopId: number, callback: (value: any) => any) {
+    const wrappedCallback = (schedules: Schedule[]) => {
+      const currentDate = new Date()
+      const filtered = schedules.filter(schedule => new Date(schedule.attributes.departure_time) > currentDate);
+      const sorted = filtered.sort((a: Schedule, b: Schedule) => {
+        return a.attributes.departure_time.localeCompare(b.attributes.departure_time)
+      })
+      return callback(sorted);
+    }
+    this.fetchEndpoint(`${this.BASE_URL}/schedules?filter[stop]=${stopId}`, wrappedCallback);
+  }
+
+  static fetchRoutes(stopId: number, callback: (value: any) => any) {
+    this.fetchEndpoint(`${this.BASE_URL}/routes?filter[stop]=${stopId}`, callback);
+  }
+
+  static fetchVehicles(routeIds: number[], callback: (value: any) => any) {
+    this.fetchEndpoint(`${this.BASE_URL}/vehicles?filter[route]=${routeIds.join(",")}`, callback);
+  }
+
+  static fetchPredictions(stopId: number, callback: (value: any) => any) {
+    this.fetchEndpoint(`${this.BASE_URL}/predictions?filter[stop]=${stopId}`, callback);
   }
 
   static fetchEndpoint(endpoint: string, callback: (value: any) => any) {
@@ -17,7 +39,7 @@ export class MbtaApiClient {
     //   instead of the client. it isn't safe to have our api key available to the front end, sadly.
     fetch(endpoint).then(response => {
       if (response.status == 200) {
-        response.json().then(callback);
+        response.json().then((json) => callback(json.data));
       }
       else {
         console.log(`status: ${response.status}, body: ${response.body}`);

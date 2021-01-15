@@ -17,12 +17,14 @@ https://commons.wikimedia.org/wiki/File:North_Station_departure_board,_December_
   - [ ] Departures for particular stop
     - [ ] Carrier
     - [x] Departure time
-    - [ ] Destination
-    - [ ] Train number
+    - [x] Destination
+    - [x] Direction
+    - [x] Train number
     - [ ] Track number
-    - [ ] Status
+    - [x] Status
 ##### Nice to have
   - [x] API client class to keep http logic out of components
+  - [ ] Redux
   - [ ] ~API key to avoid rate limiting (currently 20/min)~
     - [ ] Server endpoint to hit external service
     - [ ] Front end hits the server rather than external service
