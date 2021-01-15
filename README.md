@@ -30,5 +30,7 @@ https://commons.wikimedia.org/wiki/File:North_Station_departure_board,_December_
     - [ ] Front end hits the server rather than external service
     - [ ] Environment variables to store the api key securely
   - [ ] Cosmetics
-    - [ ] Presentable markup
+    - [x] Presentable markup
     - [ ] SASS
+    - [ ] Artistic beauty
+    - [ ] Search/filter stops
