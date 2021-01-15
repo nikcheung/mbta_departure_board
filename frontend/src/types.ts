@@ -16,7 +16,7 @@ export interface Stop extends BaseApiObject {
 export interface Schedule extends BaseApiObject {
   attributes: {
     arrival_time: string;
-    departure_time: string;
+    departure_time: Date;
     direction_id: number;
   }
   relationships: {

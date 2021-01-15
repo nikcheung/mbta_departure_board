@@ -9,8 +9,8 @@ interface DepartureBoardProps {
 }
 
 const DepartureBoard: React.FC<DepartureBoardProps> = ({stop, backToList}) => {
-  const [scheduleInfo, setScheduleInfo] = useState(null)
   // i want redux :(
+  const [scheduleInfo, setScheduleInfo] = useState(null)
   const [routes, setRoutes] = useState([]);
   const [vehicles, setVehicles] = useState([]);
   const [predictions, setPredictions] = useState([]);
@@ -24,6 +24,7 @@ const DepartureBoard: React.FC<DepartureBoardProps> = ({stop, backToList}) => {
     MbtaApiClient.fetchPredictions(stop.id, result => setPredictions(result))
     MbtaApiClient.fetchSchedules(stop.id, schedules => setScheduleInfo(schedules))
   }, [stop, backToList])
+
   return (
     <div>
       <h1>Departures from {stop.attributes.name}</h1>

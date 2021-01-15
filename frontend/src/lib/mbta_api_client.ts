@@ -13,9 +13,13 @@ export class MbtaApiClient {
   static fetchSchedules(stopId: number, callback: (value: any) => any) {
     const wrappedCallback = (schedules: Schedule[]) => {
       const currentDate = new Date()
-      const filtered = schedules.filter(schedule => new Date(schedule.attributes.departure_time) > currentDate);
+      const transformed = schedules.map(schedule => {
+        schedule.attributes.departure_time = new Date(schedule.attributes.departure_time);
+        return schedule;
+      })
+      const filtered = transformed.filter(schedule => schedule.attributes.departure_time > currentDate);
       const sorted = filtered.sort((a: Schedule, b: Schedule) => {
-        return a.attributes.departure_time.localeCompare(b.attributes.departure_time)
+        return a.attributes.departure_time.getTime() - b.attributes.departure_time.getTime()
       })
       return callback(sorted);
     }

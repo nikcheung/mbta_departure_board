@@ -23,12 +23,12 @@ const ScheduleComponent: React.FC<ScheduleProps> = ({ schedule, routes, vehicles
   const direction_id = schedule.attributes.direction_id;
   const direction = route?.attributes.direction_names[direction_id];
   const destination = route?.attributes.direction_destinations[direction_id];
-  const scheduledDepartureTime = new Date(schedule.attributes.departure_time);
-  const status = getStatus(prediction, scheduledDepartureTime);
+  const status = getStatus(prediction, schedule.attributes.departure_time);
+
   return (
     <tr>
-      <td>{scheduledDepartureTime.toDateString()}</td>
-      <td>{scheduledDepartureTime.toLocaleTimeString("en-US")}</td>
+      <td>{schedule.attributes.departure_time.toDateString()}</td>
+      <td>{schedule.attributes.departure_time.toLocaleTimeString("en-US")}</td>
       <td>{direction}</td>
       <td>{destination}</td>
       <td>{vehicle?.attributes.label}</td>
