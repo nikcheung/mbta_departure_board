@@ -35,12 +35,16 @@ module.exports = {
   entry: './src/index.tsx',
   plugins: [new webpack.ProgressPlugin()],
   output: {
-    path: path.resolve(__dirname, '../static/'),
+    path: path.resolve(__dirname, '../mbta_departure_board/static/'),
     filename: 'main.js',
   },
 
   module: {
     rules: [{
+      test: /\.(jsx|tsx)$/,
+      exclude: /node_modules/,
+      use: ['babel-loader'],
+    }, {
       test: /\.(ts|tsx)$/,
       loader: 'ts-loader',
       include: [path.resolve(__dirname, 'src')],
@@ -57,10 +61,6 @@ module.exports = {
           sourceMap: true
         }
       }]
-    }, {
-      test: /\.(js|ts)$/,
-      exclude: /node_modules/,
-      use: ['babel-loader'],
     }]
   },
 
